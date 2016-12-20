@@ -20,6 +20,5 @@ public class MainActivity extends AppCompatActivity {
 
         //for mobile infeed video
         ((AdsPlayHolderVideo)findViewById(R.id.masterhead_view)).loadDataAdUnit(this, 1009);
-
     }
 }
