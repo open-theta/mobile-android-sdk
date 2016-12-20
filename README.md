@@ -4,9 +4,11 @@ There are 2 types of mobile ad formats:
 * Infeed Video Ad
 * Display Image Banner
 
+![alt text](http://adsplay.net/img/adsplay-mobile-demo.jpg "Logo Title Text 1")
+
 # Usage
 
-### infeed tag in layout file
+### Infeed Video Ad tag in layout file
 ```
     <net.adsplay.holder.AdsPlayHolderVideo
                     android:id="@+id/masterhead_view"
