@@ -14,9 +14,11 @@ import java.io.InputStream;
 
 public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
     ImageView bmImage;
+    AdsPlayAdComponent adComponent;
 
-    public DownloadImageTask(ImageView bmImage) {
+    public DownloadImageTask(ImageView bmImage,AdsPlayAdComponent adComponent) {
         this.bmImage = bmImage;
+        this.adComponent = adComponent;
     }
 
     protected Bitmap doInBackground(String... urls) {
@@ -34,5 +36,6 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 
     protected void onPostExecute(Bitmap result) {
         bmImage.setImageBitmap(result);
+        adComponent.triggerFinishingCallback();
     }
 }

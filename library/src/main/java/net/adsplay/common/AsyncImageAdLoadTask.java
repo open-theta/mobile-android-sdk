@@ -1,21 +1,7 @@
 package net.adsplay.common;
 
 import android.os.AsyncTask;
-import android.os.Environment;
 import android.util.Log;
-
-import net.adsplay.holder.AdsPlayHolderImage;
-
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by trieu on 12/15/16.
@@ -24,10 +10,10 @@ import java.util.concurrent.TimeUnit;
 public class AsyncImageAdLoadTask extends AsyncTask<Integer, String, AdData> {
 
     static boolean rendered = false;
-    AdsPlayReady adsPlayReady;
+    AdsPlayAdComponent adsPlayAdComponent;
 
-    public AsyncImageAdLoadTask(AdsPlayReady adsPlayReady) {
-        this.adsPlayReady = adsPlayReady;
+    public AsyncImageAdLoadTask(AdsPlayAdComponent adsPlayAdComponent) {
+        this.adsPlayAdComponent = adsPlayAdComponent;
     }
 
     /**
@@ -61,7 +47,7 @@ public class AsyncImageAdLoadTask extends AsyncTask<Integer, String, AdData> {
     protected void onPostExecute(AdData adData) {
         rendered = true;
         Log.i("AdsPlay","--> onPostExecute : "+adData);
-        this.adsPlayReady.onMediaReady(adData);
+        this.adsPlayAdComponent.onMediaReady(adData);
     }
 
 }

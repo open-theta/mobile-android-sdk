@@ -22,10 +22,10 @@ public class AsyncVideoAdLoadTask extends AsyncTask<Integer, String, AdData> {
 
     static boolean rendered = false;
     String downloadedFilePath = null;
-    AdsPlayReady adsPlayReady;
+    AdsPlayAdComponent adsPlayAdComponent;
 
-    public AsyncVideoAdLoadTask(AdsPlayReady adsPlayReady) {
-        this.adsPlayReady = adsPlayReady;
+    public AsyncVideoAdLoadTask(AdsPlayAdComponent adsPlayAdComponent) {
+        this.adsPlayAdComponent = adsPlayAdComponent;
     }
 
     /**
@@ -51,7 +51,7 @@ public class AsyncVideoAdLoadTask extends AsyncTask<Integer, String, AdData> {
         AdData adData = AdDataLoader.getAdData(uuid, placementId, adType);
         if(adData != null){
             String remoteMediaPath = adData.getMedia();
-            String root = adsPlayReady.getCacheDir();
+            String root = adsPlayAdComponent.getCacheDir();
             downloadedFilePath = root +"/" + CommonUtil.md5(remoteMediaPath)+".mp4";
 
             File localFile = new File (downloadedFilePath);
@@ -133,7 +133,7 @@ public class AsyncVideoAdLoadTask extends AsyncTask<Integer, String, AdData> {
     protected void onPostExecute(AdData adData) {
         rendered = true;
         Log.i("AdsPlay","--> onPostExecute : "+adData);
-        this.adsPlayReady.onMediaReady(adData);
+        this.adsPlayAdComponent.onMediaReady(adData);
     }
 
 }

@@ -17,46 +17,27 @@ import android.widget.TextView;
 import net.adsplay.common.AdData;
 import net.adsplay.common.AdLogDataUtil;
 import net.adsplay.common.AdPermissionChecker;
-import net.adsplay.common.AdsPlayReady;
+import net.adsplay.common.AdsPlayAdComponent;
+import net.adsplay.common.AdsPlayCallback;
 import net.adsplay.common.Constants;
 import net.adsplay.common.AsyncVideoAdLoadTask;
 
 /**
  * Created by trieu on 10/30/16.
  */
-public class AdsPlayHolderVideo extends RelativeLayout implements AdsPlayReady {
+public class AdsPlayHolderVideo extends RelativeLayout implements AdsPlayAdComponent {
 
     Activity activity;
     private LinearLayout adHolder;
     private ScalableVideoView videoView;
     private TextView txttitle;
+    AdsPlayCallback callback;
     //private TextView txtdescription
     //private Button btnClose;
 
     public AdsPlayHolderVideo(Context context) {
         super(context);
         init();
-    }
-
-    /**
-     * Checks if the app has permission to write to device storage
-     *
-     * If the app does not has permission then the user will be prompted to grant permissions
-     *
-     * @param activity
-     */
-    public static void verifyStoragePermissions(Activity activity) {
-        // Check if we have write permission
-        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-            // We don't have permission so prompt the user
-            ActivityCompat.requestPermissions(
-                    activity,
-                    Constants.PERMISSIONS_STORAGE,
-                    Constants.REQUEST_EXTERNAL_STORAGE
-            );
-        }
     }
 
     public AdsPlayHolderVideo(Context context, AttributeSet attrs) {
@@ -90,8 +71,9 @@ public class AdsPlayHolderVideo extends RelativeLayout implements AdsPlayReady {
 
 
     @Override
-    public void loadDataAdUnit(Activity activity, int placementId){
+    public void loadAdData(Activity activity, int placementId, AdsPlayCallback callback){
         this.activity = activity;
+        this.callback = callback;
         AdPermissionChecker.checkSystemPermissions(activity);
         hideAdView();
         new AsyncVideoAdLoadTask(this).execute(placementId);
@@ -120,6 +102,7 @@ public class AdsPlayHolderVideo extends RelativeLayout implements AdsPlayReady {
         AdsPlayHolderVideo.this.videoView.setVisibility(GONE);
         AdsPlayHolderVideo.this.txttitle.setVisibility(GONE);
         AdsPlayHolderVideo.this.adHolder.setVisibility(GONE);
+        this.callback.onFinished();
     }
 
     @Override
@@ -142,34 +125,32 @@ public class AdsPlayHolderVideo extends RelativeLayout implements AdsPlayReady {
                 this.videoView.prepareAsync(new MediaPlayer.OnPreparedListener() {
                     @Override
                     public void onPrepared(MediaPlayer mp) {
-                        Log.i("AdsPlay","Ad Duration: "+mp.getDuration());
-                        AdsPlayHolderVideo.this.videoView.start();
-
-                        getVideoView().setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                            @Override
-                            public void onCompletion(MediaPlayer mp) {
-                                mp.stop();
-                                mp.release();
-                                closeAdView();
-                            }
-                        });
-
+                    Log.i("AdsPlay","Ad Duration: "+mp.getDuration());
+                    AdsPlayHolderVideo.this.videoView.start();
+                    getVideoView().setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        mp.stop();
+                        mp.release();
+                        closeAdView();
+                    }
+                    });
                     }
                 });
 
                 this.videoView.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        AdLogDataUtil.log("click",adData);
-                        synchronized(this) {
-                            if( ! valumeEnabled ){
-                                valumeEnabled = true;
-                                AdsPlayHolderVideo.this.videoView.setVolume(0, 2);
-                            } else {
-                                valumeEnabled = false;
-                                AdsPlayHolderVideo.this.videoView.setVolume(0, 0);
-                            }
+                    AdLogDataUtil.log("click",adData);
+                    synchronized(this) {
+                        if( ! valumeEnabled ){
+                            valumeEnabled = true;
+                            AdsPlayHolderVideo.this.videoView.setVolume(0, 2);
+                        } else {
+                            valumeEnabled = false;
+                            AdsPlayHolderVideo.this.videoView.setVolume(0, 0);
                         }
+                    }
                     }
                 });
 
@@ -185,6 +166,10 @@ public class AdsPlayHolderVideo extends RelativeLayout implements AdsPlayReady {
     @Override
     public String getCacheDir(){
         return this.activity.getCacheDir().getPath();
+    }
+
+    public void triggerFinishingCallback(){
+        this.callback.onFinished();
     }
 
 }

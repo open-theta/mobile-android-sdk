@@ -16,7 +16,8 @@ import net.adsplay.common.AdData;
 
 import net.adsplay.common.AdLogDataUtil;
 import net.adsplay.common.AdPermissionChecker;
-import net.adsplay.common.AdsPlayReady;
+import net.adsplay.common.AdsPlayAdComponent;
+import net.adsplay.common.AdsPlayCallback;
 import net.adsplay.common.AsyncImageAdLoadTask;
 import net.adsplay.common.DownloadImageTask;
 
@@ -26,12 +27,13 @@ import net.adsplay.common.DownloadImageTask;
  * Created by trieu on 11/3/16.
  */
 
-public class AdsPlayHolderImage extends RelativeLayout implements AdsPlayReady {
+public class AdsPlayHolderImage extends RelativeLayout implements AdsPlayAdComponent {
 
     Activity activity;
     private LinearLayout adHolder;
     private ImageView imageView;
     int width, height;
+    AdsPlayCallback callback;
 
     public AdsPlayHolderImage(Context context) {
         super(context);
@@ -93,7 +95,7 @@ public class AdsPlayHolderImage extends RelativeLayout implements AdsPlayReady {
                 String file =  adData.getMedia();
                 Log.i("AdsPlay","-------> playAd file: "+file);
 
-                new DownloadImageTask(this.imageView).execute(file);
+                new DownloadImageTask(this.imageView, this).execute(file);
 
                 this.imageView.setOnClickListener(new OnClickListener() {
                     @Override
@@ -117,8 +119,9 @@ public class AdsPlayHolderImage extends RelativeLayout implements AdsPlayReady {
     }
 
     @Override
-    public void loadDataAdUnit(Activity activity, int placementId){
+    public void loadAdData(Activity activity, int placementId, AdsPlayCallback callback){
         this.activity = activity;
+        this.callback = callback;
         AdPermissionChecker.checkSystemPermissions(activity);
         hideAdView();
         new AsyncImageAdLoadTask(this).execute(placementId);
@@ -127,5 +130,9 @@ public class AdsPlayHolderImage extends RelativeLayout implements AdsPlayReady {
     @Override
     public String getCacheDir(){
         return this.activity.getCacheDir().getPath();
+    }
+
+    public void triggerFinishingCallback(){
+        this.callback.onFinished();
     }
 }
