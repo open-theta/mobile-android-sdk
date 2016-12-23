@@ -2,8 +2,11 @@ package net.adsplay.common;
 
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -45,10 +48,10 @@ public class AdDataLoader {
         OkHttpClient client = httpClient.build();
         AdData adData = null;
         try {
-            String url = getAdUrl(uuid, placementId, adType);
-            Log.i("AdsPlay", url);
+            String adUrl = getAdUrl(uuid, placementId, adType);
+            Log.i("AdsPlay", adUrl);
             Request request = new Request.Builder()
-                    .url(url)
+                    .url(adUrl)
                     .addHeader("User-Agent","AdsPlayAndroidSDK1x6")
                     .build();
             Response response = client.newCall(request).execute();
@@ -58,21 +61,39 @@ public class AdDataLoader {
             if(ad.get("adId") == null){
                 return null;
             }
-
             int adId = ad.getInt("adId");
-            String media = ad.getString("adMedia");
-            String adBeacon = ad.getString("adBeacon");
-            if(adType == AdData.ADTYPE_IMAGE_DISPLAY_AD){
-                media = "http:" + media;
+            int adType2 = ad.getInt("adType");
+            if(adType2 == adType){
+                String media = ad.getString("adMedia");
+                String clickActionText = ad.getString("clickActionText");
+                String adBeacon = ad.getString("adBeacon");
+                JSONArray tracking3rdUrls = ad.getJSONArray("tracking3rdUrls");
+                if(adType == AdData.ADTYPE_IMAGE_DISPLAY_AD){
+                    media = "http:" + media;
+                }
+                String clickUrl = ad.getString("clickthroughUrl");
+                adData = new AdData(adId
+                        , media
+                        , clickActionText
+                        ,clickUrl
+                );
+
+                //for AdsPlay log tracking
+                adData.setAdBeacon(adBeacon);
+
+                //for 3rd party log tracking
+                List<String> listData = new ArrayList<>(tracking3rdUrls.length());
+                if (tracking3rdUrls != null) {
+                    for (int i=0;i<tracking3rdUrls.length();i++){
+                        String url3rd = tracking3rdUrls.getString(i);
+                        if(url3rd != null){
+                            listData.add(url3rd);
+                        }
+                    }
+                }
+                adData.setTracking3rdUrls(listData);
+                Log.i("AdsPlay",rs);
             }
-            String clickUrl = ad.getString("clickthroughUrl");
-            adData = new AdData(adId
-                    , media
-                    , ""
-                    ,clickUrl
-            );
-            adData.setAdBeacon(adBeacon);
-            Log.i("AdsPlay",rs);
         } catch (Exception e){
             Log.i("AdsPlay",e.toString());
         }

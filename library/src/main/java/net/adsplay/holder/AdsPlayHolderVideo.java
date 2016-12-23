@@ -1,11 +1,8 @@
 package net.adsplay.holder;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
-import android.support.v4.app.ActivityCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -19,7 +16,6 @@ import net.adsplay.common.AdLogDataUtil;
 import net.adsplay.common.AdPermissionChecker;
 import net.adsplay.common.AdsPlayAdComponent;
 import net.adsplay.common.AdsPlayCallback;
-import net.adsplay.common.Constants;
 import net.adsplay.common.AsyncVideoAdLoadTask;
 
 /**
@@ -54,7 +50,7 @@ public class AdsPlayHolderVideo extends RelativeLayout implements AdsPlayAdCompo
         return this.videoView;
     }
 
-    boolean valumeEnabled = false;
+    boolean volumeEnabled = false;
     int width, height;
 
 
@@ -143,11 +139,11 @@ public class AdsPlayHolderVideo extends RelativeLayout implements AdsPlayAdCompo
                     public void onClick(View v) {
                     AdLogDataUtil.log("click",adData);
                     synchronized(this) {
-                        if( ! valumeEnabled ){
-                            valumeEnabled = true;
+                        if( !volumeEnabled){
+                            volumeEnabled = true;
                             AdsPlayHolderVideo.this.videoView.setVolume(0, 2);
                         } else {
-                            valumeEnabled = false;
+                            volumeEnabled = false;
                             AdsPlayHolderVideo.this.videoView.setVolume(0, 0);
                         }
                     }

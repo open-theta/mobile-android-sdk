@@ -3,6 +3,9 @@ package net.adsplay.common;
 import android.os.SystemClock;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -22,9 +25,10 @@ public class AdLogDataUtil {
 
     static final OkHttpClient client = new OkHttpClient();
 
-    static String buildLogUrl(String metric, AdData adData){
-        StringBuilder u = new StringBuilder();
+    static List<String> buildLogUrl(String metric, AdData adData){
+        List<String> urls = new ArrayList<>();
 
+        StringBuilder u = new StringBuilder();
         int adId = adData.getAdId();
         String adBeacon = adData.getAdBeacon();
         int t = (int) (System.currentTimeMillis()/1000L);
@@ -36,18 +40,24 @@ public class AdLogDataUtil {
         u.append("&adid=").append(adId);
         u.append("&beacon=").append(adBeacon);
         u.append("&t=").append(t);
-        return u.toString();
+
+        urls.add(u.toString());
+        urls.addAll(adData.getTracking3rdUrls());
+
+        return urls;
     }
 
     public static void log(String metric, AdData adData){
         try {
-            String url = buildLogUrl(metric, adData);
-            Log.e("AdsPlay",metric + " => "+url);
-            Request request = new Request.Builder()
-                    .url(url)
-                    .addHeader("User-Agent","AdsPlayAndroidSDK1x6")
-                    .build();
-            client.newCall(request).execute();
+            List<String> urls = buildLogUrl(metric, adData);
+            for(String url : urls){
+                Log.e("AdsPlay",metric + " => "+url);
+                Request request = new Request.Builder()
+                        .url(url)
+                        .addHeader("User-Agent","AdsPlayAndroidSDK1x6")
+                        .build();
+                client.newCall(request).execute();
+            }
         } catch (Exception e){
             Log.e("AdsPlay",e.toString());
         }
