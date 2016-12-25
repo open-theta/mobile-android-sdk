@@ -25,8 +25,8 @@ public class AdLogDataUtil {
 
     static final OkHttpClient client = new OkHttpClient();
 
-    static List<String> buildLogUrl(String metric, AdData adData){
-        List<String> urls = new ArrayList<>();
+    static List<AdTrackingEvent> buildLogUrl(String metric, AdData adData){
+        List<AdTrackingEvent> adTrackingEvents = new ArrayList<>();
 
         StringBuilder u = new StringBuilder();
         int adId = adData.getAdId();
@@ -41,19 +41,19 @@ public class AdLogDataUtil {
         u.append("&beacon=").append(adBeacon);
         u.append("&t=").append(t);
 
-        urls.add(u.toString());
-        urls.addAll(adData.getTracking3rdUrls());
+        adTrackingEvents.add( new AdTrackingEvent(metric, u.toString(), 1));
+        adTrackingEvents.addAll(adData.getTracking3rdUrls());
 
-        return urls;
+        return adTrackingEvents;
     }
 
     public static void log(String metric, AdData adData){
         try {
-            List<String> urls = buildLogUrl(metric, adData);
-            for(String url : urls){
-                Log.e("AdsPlay",metric + " => "+url);
+            List<AdTrackingEvent> adTrackingEvents = buildLogUrl(metric, adData);
+            for(AdTrackingEvent adTrackingEvent : adTrackingEvents){
+                Log.e("AdsPlay",metric + " => "+adTrackingEvent.getEvent()+" "+adTrackingEvent.getUrl());
                 Request request = new Request.Builder()
-                        .url(url)
+                        .url(adTrackingEvent.getUrl())
                         .addHeader("User-Agent","AdsPlayAndroidSDK1x6")
                         .build();
                 client.newCall(request).execute();

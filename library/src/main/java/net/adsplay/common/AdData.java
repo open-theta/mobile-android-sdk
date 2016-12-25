@@ -24,7 +24,7 @@ public class AdData {
     protected int height = 0;
     protected int placementId = 0;
     protected String adCode = "";
-    protected List<String> tracking3rdUrls;
+    protected List<AdTrackingEvent> adTrackingEvents;
 
     public AdData(int adId, String media, String title, String clickthroughUrl) {
         this.adId = adId;
@@ -128,16 +128,16 @@ public class AdData {
         this.adCode = adCode;
     }
 
-    public List<String> getTracking3rdUrls() {
-        if(tracking3rdUrls != null) {
-            return tracking3rdUrls;
+    public List<AdTrackingEvent> getTracking3rdUrls() {
+        if(adTrackingEvents != null) {
+            return adTrackingEvents;
         } else {
             return new ArrayList<>(0);
         }
     }
 
-    public void setTracking3rdUrls(List<String> tracking3rdUrls) {
-        this.tracking3rdUrls = tracking3rdUrls;
+    public void setTracking3rdUrls(List<AdTrackingEvent> adTrackingEvents) {
+        this.adTrackingEvents = adTrackingEvents;
     }
 
     @Override
