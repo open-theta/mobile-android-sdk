@@ -27,7 +27,7 @@
         android:paddingBottom="3sp"
         android:textColor="@android:color/white" />
 
-    <!--
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="64dp"
@@ -62,6 +62,6 @@
             android:textColor="@android:color/white"
             android:textAlignment="center" />
     </LinearLayout>
-    -->
+
 
 </LinearLayout>

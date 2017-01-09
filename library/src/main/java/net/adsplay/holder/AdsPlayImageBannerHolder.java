@@ -27,7 +27,7 @@ import net.adsplay.common.DownloadImageTask;
  * Created by trieu on 11/3/16.
  */
 
-public class AdsPlayHolderImage extends RelativeLayout implements AdsPlayAdComponent {
+public class AdsPlayImageBannerHolder extends RelativeLayout implements AdsPlayAdComponent {
 
     Activity activity;
     private LinearLayout adHolder;
@@ -35,17 +35,17 @@ public class AdsPlayHolderImage extends RelativeLayout implements AdsPlayAdCompo
     int width, height;
     AdsPlayCallback callback;
 
-    public AdsPlayHolderImage(Context context) {
+    public AdsPlayImageBannerHolder(Context context) {
         super(context);
         init();
     }
 
-    public AdsPlayHolderImage(Context context, AttributeSet attrs) {
+    public AdsPlayImageBannerHolder(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public AdsPlayHolderImage(Context context, AttributeSet attrs, int defStyle) {
+    public AdsPlayImageBannerHolder(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init();
     }
@@ -63,8 +63,8 @@ public class AdsPlayHolderImage extends RelativeLayout implements AdsPlayAdCompo
     }
 
     void closeAdView(){
-        AdsPlayHolderImage.this.adHolder.setVisibility(GONE);
-        AdsPlayHolderImage.this.imageView.setVisibility(GONE);
+        AdsPlayImageBannerHolder.this.adHolder.setVisibility(GONE);
+        AdsPlayImageBannerHolder.this.imageView.setVisibility(GONE);
     }
 
     void hideAdView(){
@@ -105,7 +105,7 @@ public class AdsPlayHolderImage extends RelativeLayout implements AdsPlayAdCompo
                             AdLogDataUtil.log("click",adData);
                             Intent i = new Intent(Intent.ACTION_VIEW);
                             i.setData(Uri.parse(adData.getClickthroughUrl()));
-                            AdsPlayHolderImage.this.activity.startActivity(i);
+                            AdsPlayImageBannerHolder.this.activity.startActivity(i);
                         }
                     }
                 });

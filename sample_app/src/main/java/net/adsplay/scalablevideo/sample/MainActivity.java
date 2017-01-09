@@ -5,8 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import net.adsplay.common.AdsPlayCallback;
-import net.adsplay.holder.AdsPlayHolderImage;
-import net.adsplay.holder.AdsPlayHolderVideo;
+import net.adsplay.holder.AdsPlayImageBannerHolder;
+import net.adsplay.holder.AdsPlayVideoInfeedHolder;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("AdsPlay","------->  loaded PlacementId: "+bannerPlacementId);
             }
         };
-        AdsPlayHolderImage holderImage = (AdsPlayHolderImage) findViewById(R.id.banner_view);
+        AdsPlayImageBannerHolder holderImage = (AdsPlayImageBannerHolder) findViewById(R.id.banner_view);
         holderImage.loadAdData(this, bannerPlacementId, bannerCallback);
 
 
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("AdsPlay", "------->  loaded PlacementId: " + infeedPlacementId);
             }
         };
-        AdsPlayHolderVideo holderVideo = (AdsPlayHolderVideo) findViewById(R.id.masterhead_view);
-        holderVideo.loadAdData(this, infeedPlacementId,  infeedCallback);
+        AdsPlayVideoInfeedHolder infeedHolder = (AdsPlayVideoInfeedHolder) findViewById(R.id.masterhead_view);
+        infeedHolder.loadAdData(this, infeedPlacementId,  infeedCallback);
     }
 }

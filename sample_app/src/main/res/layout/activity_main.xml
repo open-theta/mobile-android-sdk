@@ -21,7 +21,7 @@
                 android:orientation="vertical">
 
 
-                <net.adsplay.holder.AdsPlayHolderVideo
+                <net.adsplay.holder.AdsPlayVideoInfeedHolder
                     android:id="@+id/masterhead_view"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
         >
 
         <!-- ########### BEGIN AdsPlay Image Banner Tag Code ############# -->
-        <net.adsplay.holder.AdsPlayHolderImage
+        <net.adsplay.holder.AdsPlayImageBannerHolder
             android:id="@+id/banner_view"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

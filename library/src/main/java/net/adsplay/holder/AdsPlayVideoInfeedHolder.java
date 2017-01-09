@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import net.adsplay.common.AdData;
 import net.adsplay.common.AdLogDataUtil;
@@ -21,27 +20,24 @@ import net.adsplay.common.AsyncVideoAdLoadTask;
 /**
  * Created by trieu on 10/30/16.
  */
-public class AdsPlayHolderVideo extends RelativeLayout implements AdsPlayAdComponent {
+public class AdsPlayVideoInfeedHolder extends RelativeLayout implements AdsPlayAdComponent {
 
     Activity activity;
     private LinearLayout adHolder;
     private ScalableVideoView videoView;
-    private TextView txttitle;
     AdsPlayCallback callback;
-    //private TextView txtdescription
-    //private Button btnClose;
 
-    public AdsPlayHolderVideo(Context context) {
+    public AdsPlayVideoInfeedHolder(Context context) {
         super(context);
         init();
     }
 
-    public AdsPlayHolderVideo(Context context, AttributeSet attrs) {
+    public AdsPlayVideoInfeedHolder(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public AdsPlayHolderVideo(Context context, AttributeSet attrs, int defStyle) {
+    public AdsPlayVideoInfeedHolder(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init();
     }
@@ -55,14 +51,10 @@ public class AdsPlayHolderVideo extends RelativeLayout implements AdsPlayAdCompo
 
 
     private void init() {
-        inflate(getContext(), R.layout.holdervideo, this);
-
+        inflate(getContext(), R.layout.holderinfeed, this);
         this.videoView = (ScalableVideoView) findViewById(R.id.masterheadVideoView);
-        this.txttitle = (TextView) findViewById(R.id.masterheadTitle);
         this.adHolder = (LinearLayout)findViewById(R.id.masterheadHolder);
-
         this.videoView.setVisibility(GONE);
-        this.txttitle.setVisibility(GONE);
     }
 
 
@@ -95,9 +87,8 @@ public class AdsPlayHolderVideo extends RelativeLayout implements AdsPlayAdCompo
     }
 
     void closeAdView(){
-        AdsPlayHolderVideo.this.videoView.setVisibility(GONE);
-        AdsPlayHolderVideo.this.txttitle.setVisibility(GONE);
-        AdsPlayHolderVideo.this.adHolder.setVisibility(GONE);
+        AdsPlayVideoInfeedHolder.this.videoView.setVisibility(GONE);
+        AdsPlayVideoInfeedHolder.this.adHolder.setVisibility(GONE);
         this.callback.onFinished();
     }
 
@@ -112,17 +103,15 @@ public class AdsPlayHolderVideo extends RelativeLayout implements AdsPlayAdCompo
 
                 Log.i("AdsPlay","-------> playAd file: "+file);
                 this.videoView.setVisibility(VISIBLE);
-                this.txttitle.setVisibility(VISIBLE);
 
                 this.videoView.setDataSource(file);
                 this.videoView.setVolume(0, 2);
-                this.txttitle.setText(adTitle);
 
                 this.videoView.prepareAsync(new MediaPlayer.OnPreparedListener() {
                     @Override
                     public void onPrepared(MediaPlayer mp) {
                     Log.i("AdsPlay","Ad Duration: "+mp.getDuration());
-                    AdsPlayHolderVideo.this.videoView.start();
+                    AdsPlayVideoInfeedHolder.this.videoView.start();
                     getVideoView().setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override
                     public void onCompletion(MediaPlayer mp) {
@@ -141,10 +130,10 @@ public class AdsPlayHolderVideo extends RelativeLayout implements AdsPlayAdCompo
                     synchronized(this) {
                         if( !volumeEnabled){
                             volumeEnabled = true;
-                            AdsPlayHolderVideo.this.videoView.setVolume(0, 2);
+                            AdsPlayVideoInfeedHolder.this.videoView.setVolume(0, 2);
                         } else {
                             volumeEnabled = false;
-                            AdsPlayHolderVideo.this.videoView.setVolume(0, 0);
+                            AdsPlayVideoInfeedHolder.this.videoView.setVolume(0, 0);
                         }
                     }
                     }

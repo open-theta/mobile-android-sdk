@@ -6,8 +6,6 @@ import android.content.pm.PackageManager;
 import android.os.StrictMode;
 import android.support.v4.app.ActivityCompat;
 
-import net.adsplay.holder.AdsPlayHolderVideo;
-
 /**
  * Created by trieu on 11/3/16.
  */

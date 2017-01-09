@@ -19,11 +19,12 @@ import okhttp3.Response;
 
 public class AdDataLoader {
 
+    //auto-sharding ad traffic at the app
     static final String[] baseAdDeliveryUrls = {
             "http://d1.adsplay.net/get",
             "http://d2.adsplay.net/get",
-            "http://d4.adsplay.net/get",
-            "http://d6.adsplay.net/get",
+            "http://d3.adsplay.net/get",
+            "http://d4.adsplay.net/get"
     };
 
     public static String getAdUrl(String uuid, int placementId, int adType){
