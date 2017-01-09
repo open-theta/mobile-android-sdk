@@ -79,7 +79,6 @@ public class AsyncVideoAdLoadTask extends AsyncTask<Integer, String, AdData> {
             Log.i("AdsPlay","Downloading");
             Log.i("AdsPlay","File: "+downloadedFilePath);
 
-
             URL url = new URL(mediaPath);
             Log.i("AdsPlay","url: "+url);
 
