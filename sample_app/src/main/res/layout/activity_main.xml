@@ -7,13 +7,14 @@
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:background="#000"
         android:layout_above="@+id/footerLayout">
         <!-- Put all your application views here, such as buttons, textviews, edittexts and so on -->
 
         <WebView
             android:id="@+id/masthead_webview"
             android:layout_width="fill_parent"
-            android:layout_height="260dp"
+            android:layout_height="270dp"
             />
 
         <ScrollView
