@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -22,7 +23,7 @@ import net.adsplay.common.AsyncVideoAdLoadTask;
 /**
  * Created by trieu on 10/30/16.
  */
-public class AdsPlayVideoMastheadHolder extends RelativeLayout implements AdsPlayAdComponent {
+public class AdsPlayMastheadHolder extends RelativeLayout implements AdsPlayAdComponent {
 
     Activity activity;
     private LinearLayout adHolder;
@@ -32,17 +33,17 @@ public class AdsPlayVideoMastheadHolder extends RelativeLayout implements AdsPla
     private TextView txtdescription;
     private Button btnClose;
 
-    public AdsPlayVideoMastheadHolder(Context context) {
+    public AdsPlayMastheadHolder(Context context) {
         super(context);
         init();
     }
 
-    public AdsPlayVideoMastheadHolder(Context context, AttributeSet attrs) {
+    public AdsPlayMastheadHolder(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public AdsPlayVideoMastheadHolder(Context context, AttributeSet attrs, int defStyle) {
+    public AdsPlayMastheadHolder(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init();
     }
@@ -94,9 +95,9 @@ public class AdsPlayVideoMastheadHolder extends RelativeLayout implements AdsPla
     }
 
     void closeAdView(){
-        AdsPlayVideoMastheadHolder.this.videoView.setVisibility(GONE);
-        AdsPlayVideoMastheadHolder.this.txttitle.setVisibility(GONE);
-        AdsPlayVideoMastheadHolder.this.adHolder.setVisibility(GONE);
+        AdsPlayMastheadHolder.this.videoView.setVisibility(GONE);
+        AdsPlayMastheadHolder.this.txttitle.setVisibility(GONE);
+        AdsPlayMastheadHolder.this.adHolder.setVisibility(GONE);
         this.callback.onFinished();
     }
 
@@ -121,7 +122,7 @@ public class AdsPlayVideoMastheadHolder extends RelativeLayout implements AdsPla
                     @Override
                     public void onPrepared(MediaPlayer mp) {
                     Log.i("AdsPlay","Ad Duration: "+mp.getDuration());
-                    AdsPlayVideoMastheadHolder.this.videoView.start();
+                    AdsPlayMastheadHolder.this.videoView.start();
                     getVideoView().setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override
                     public void onCompletion(MediaPlayer mp) {
@@ -140,10 +141,10 @@ public class AdsPlayVideoMastheadHolder extends RelativeLayout implements AdsPla
                     synchronized(this) {
                         if( !volumeEnabled){
                             volumeEnabled = true;
-                            AdsPlayVideoMastheadHolder.this.videoView.setVolume(0, 2);
+                            AdsPlayMastheadHolder.this.videoView.setVolume(0, 2);
                         } else {
                             volumeEnabled = false;
-                            AdsPlayVideoMastheadHolder.this.videoView.setVolume(0, 0);
+                            AdsPlayMastheadHolder.this.videoView.setVolume(0, 0);
                         }
                     }
                     }

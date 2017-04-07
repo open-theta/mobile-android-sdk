@@ -3,6 +3,9 @@ package net.adsplay.scalablevideo.sample;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import net.adsplay.common.AdsPlayCallback;
 import net.adsplay.holder.AdsPlayImageBannerHolder;
@@ -40,5 +43,11 @@ public class MainActivity extends AppCompatActivity {
         };
         AdsPlayVideoInfeedHolder infeedHolder = (AdsPlayVideoInfeedHolder) findViewById(R.id.masterhead_view);
         infeedHolder.loadAdData(this, infeedPlacementId,  infeedCallback);
+
+        WebView myWebView = (WebView) findViewById(R.id.masthead_webview);
+        WebSettings webSettings = myWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        myWebView.setWebViewClient(new WebViewClient());
+        myWebView.loadUrl("http://richmedia.adsplay.net/masthead-mobile");
     }
 }

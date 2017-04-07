@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="760dp"
     android:orientation="vertical"
     android:background="#212121"
     android:id="@+id/masterheadHolder"
@@ -14,6 +14,9 @@
         android:layout_height="160dp"
         android:id="@+id/masterheadVideoView"
         android:layout_weight="0.10" />
+
+
+
 
     <TextView
         android:text=""

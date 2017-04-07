@@ -10,6 +10,12 @@
         android:layout_above="@+id/footerLayout">
         <!-- Put all your application views here, such as buttons, textviews, edittexts and so on -->
 
+        <WebView
+            android:id="@+id/masthead_webview"
+            android:layout_width="fill_parent"
+            android:layout_height="260dp"
+            />
+
         <ScrollView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
