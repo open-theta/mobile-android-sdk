@@ -7,95 +7,19 @@
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="#000"
-        android:layout_above="@+id/footerLayout">
+        android:background="#fff"
+        >
         <!-- Put all your application views here, such as buttons, textviews, edittexts and so on -->
 
-        <!-- Webview to display Ad -->
+
+        <!-- ########### BEGIN AdsPlay Webview ############# -->
         <WebView
             android:id="@+id/masthead_adview"
             android:layout_width="fill_parent"
             android:layout_height="272dp"
             />
+        <!-- ########### END AdsPlay Webview ############# -->
 
-
-        <ScrollView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            >
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-
-                <net.adsplay.holder.AdsPlayVideoInfeedHolder
-                    android:id="@+id/masterhead_view"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/video_thumb" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/video_thumb" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/video_thumb" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/video_thumb" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/video_thumb" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/video_thumb" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/video_thumb" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/video_thumb" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/video_thumb" />
-
-
-            </LinearLayout>
-        </ScrollView>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/footerLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="bottom"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        >
 
         <!-- ########### BEGIN AdsPlay Image Banner Tag Code ############# -->
         <net.adsplay.holder.AdsPlayImageBannerHolder
@@ -103,8 +27,13 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             />
-
         <!-- ########### END AdsPlay Image Banner Tag Code ############# -->
 
     </LinearLayout>
+
+
+
+
+
+
 </RelativeLayout>

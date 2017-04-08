@@ -78,11 +78,11 @@ public final class AdsPlayMastheadWebview {
         wSettings.setGeolocationEnabled( true );
         wSettings.setUserAgentString(USER_AGENT);
 
-        myWebView.setVisibility(View.INVISIBLE);
         myWebView.setBackgroundColor(Color.TRANSPARENT);
         myWebView.setVerticalScrollBarEnabled(false);
         myWebView.setHorizontalScrollBarEnabled(false);
-        myWebView.addJavascriptInterface(new MastheadWebviewNative(applicationContext),"MastheadWebviewNative");
+        MastheadWebviewNative webviewNative = new MastheadWebviewNative(applicationContext);
+        myWebView.addJavascriptInterface(webviewNative,"MastheadWebviewNative");
 
         Request request = new Request.Builder().url(buildAdRequestUrl()).addHeader("User-Agent",USER_AGENT).build();
 
@@ -109,7 +109,6 @@ public final class AdsPlayMastheadWebview {
                             try {
                                 String html = response.body().string();
                                 if (html.contains("html")) {
-                                    myWebView.setVisibility(View.VISIBLE);
                                     myWebView.loadDataWithBaseURL(BASE_URL,html,TEXT_HTML, UTF_8,REFERER_URL);
                                 } else {
                                     myWebView.setVisibility(View.GONE);
@@ -180,6 +179,9 @@ public final class AdsPlayMastheadWebview {
         @JavascriptInterface
         public void closeAdView() {
             myWebView.setVisibility(View.GONE);
+            myWebView.setVisibility(View.VISIBLE);
+            myWebView.destroy();
+
         }
     }
 }
