@@ -172,11 +172,11 @@ public final class AdsPlayMastheadWebview {
         Context mContext;
 
         /** Instantiate the interface and set the context */
-        MastheadWebviewNative(Context c) {
+        public MastheadWebviewNative(Context c) {
             mContext = c;
         }
 
-        /** Show a toast from the web page */
+        /** close ad */
         @JavascriptInterface
         public void closeAdView() {
             myWebView.setVisibility(View.GONE);

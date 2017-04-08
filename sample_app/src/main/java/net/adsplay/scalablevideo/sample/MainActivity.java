@@ -57,8 +57,8 @@ public class MainActivity extends AppCompatActivity {
         //AdsPlayVideoInfeedHolder infeedHolder = (AdsPlayVideoInfeedHolder) findViewById(R.id.masterhead_view);
         //infeedHolder.loadAdData(this, infeedPlacementId,  infeedCallback);
 
-        WebView myWebView = (WebView) findViewById(R.id.masthead_webview);
-        new AdsPlayMastheadWebview(this,myWebView);
+        WebView mastheadAdview = (WebView) findViewById(R.id.masthead_adview);
+        new AdsPlayMastheadWebview(this,mastheadAdview);
     }
 
 
