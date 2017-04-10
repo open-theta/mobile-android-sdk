@@ -27,6 +27,8 @@ import android.webkit.WebViewClient;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -93,7 +95,7 @@ public final class AdsPlayMastheadWebview {
                 mainHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        myWebView.setVisibility(View.GONE);
+                        closeAd();
                     }
                 });
             }
@@ -115,7 +117,7 @@ public final class AdsPlayMastheadWebview {
                                 }
                             } catch (Exception e) {
                                 Log.e("AdsPlay",e.toString());
-                                myWebView.setVisibility(View.GONE);
+                                closeAd();
                             }
                         }
                     });
@@ -140,13 +142,13 @@ public final class AdsPlayMastheadWebview {
             Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             activity.startActivity(i);
             Log.d("AdsPlay.WebViewClient",url);
-            myWebView.setVisibility(View.GONE);
+            closeAd();
             return true;
         }
 
         @Override
         public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-            myWebView.setVisibility(View.GONE);
+            closeAd();
         }
 
         @Override
@@ -178,10 +180,13 @@ public final class AdsPlayMastheadWebview {
         /** close ad */
         @JavascriptInterface
         public void closeAdView() {
-            myWebView.setVisibility(View.GONE);
-            myWebView.setVisibility(View.VISIBLE);
-            myWebView.destroy();
-
+            closeAd();
         }
+    }
+
+    private void closeAd() {
+        myWebView.setVisibility(View.GONE);
+        myWebView.invalidate();
+        myWebView.destroy();
     }
 }

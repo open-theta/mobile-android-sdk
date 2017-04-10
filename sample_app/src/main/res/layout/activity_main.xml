@@ -21,12 +21,12 @@
         <!-- ########### END AdsPlay Webview ############# -->
 
 
-        <!-- ########### BEGIN AdsPlay Image Banner Tag Code ############# -->
+        <!-- ########### BEGIN AdsPlay Image Banner Tag Code #############
         <net.adsplay.holder.AdsPlayImageBannerHolder
             android:id="@+id/banner_view"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            />
+            />-->
         <!-- ########### END AdsPlay Image Banner Tag Code ############# -->
 
     </LinearLayout>

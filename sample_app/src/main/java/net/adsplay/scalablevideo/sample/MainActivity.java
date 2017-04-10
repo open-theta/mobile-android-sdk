@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("AdsPlay","------->  loaded PlacementId: "+bannerPlacementId);
             }
         };
-        AdsPlayImageBannerHolder holderImage = (AdsPlayImageBannerHolder) findViewById(R.id.banner_view);
-        holderImage.loadAdData(this, bannerPlacementId, bannerCallback);
+        //AdsPlayImageBannerHolder holderImage = (AdsPlayImageBannerHolder) findViewById(R.id.banner_view);
+        //holderImage.loadAdData(this, bannerPlacementId, bannerCallback);
 
 
         //for mobile infeed video
