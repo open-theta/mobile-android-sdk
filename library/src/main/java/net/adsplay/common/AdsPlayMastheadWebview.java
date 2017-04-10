@@ -41,11 +41,13 @@ import okhttp3.Response;
  */
 
 public final class AdsPlayMastheadWebview {
+    public static final int ADTYPE_MASTHEAD = 11;//masthead for mobile app
+    public static final int PLACEMENT_MASTHEAD_ANDROID = 313;//masthead for mobile app
     public static final String TEXT_HTML = "text/html";
     public static final String UTF_8 = "UTF-8";
 
     final static String USER_AGENT = System.getProperty("http.agent");
-    final static String BASE_URL = "http://st.adsplay.net/js/masthead/masthead.html?";
+    final static String BASE_URL = "http://d4.adsplay.net/get?";
     final static String REFERER_URL = "https://fptplay.net/";
     final static String SOURCE = "AdsPlaySDK.v2";
     final static OkHttpClient httpClient = new OkHttpClient();
@@ -64,8 +66,11 @@ public final class AdsPlayMastheadWebview {
     public void init(){
         myWebView.setWebViewClient(webViewClient);
 
+
         WebSettings wSettings = myWebView.getSettings();
         Context applicationContext = activity.getApplicationContext();
+
+
         wSettings.setAppCachePath( applicationContext.getCacheDir().getAbsolutePath() );
         wSettings.setAllowFileAccess( true );
         wSettings.setAppCacheEnabled( true );
@@ -129,9 +134,11 @@ public final class AdsPlayMastheadWebview {
     String buildAdRequestUrl(){
         long t = System.currentTimeMillis()/1000L;
         StringBuilder url = new StringBuilder(BASE_URL);
-        url.append("t=").append(t);
+        url.append("time=").append(t);
         url.append("&uuid=").append(uuid);
-        url.append("&s=").append(SOURCE);
+        url.append("&source=").append(SOURCE);
+        url.append("&adtype=").append(ADTYPE_MASTHEAD);
+        url.append("&placement=").append(PLACEMENT_MASTHEAD_ANDROID);
         Log.d("AdsPlay.WebViewClient","url "+url);
         return url.toString();
     }
