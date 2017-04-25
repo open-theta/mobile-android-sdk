@@ -1,63 +1,43 @@
-# AdsPlay Mobile SDK for special format
+# AdsPlay Mobile SDK for special formats
 
-There are 2 types of mobile ad formats:
-* Infeed Video Ad
-* Display Image Banner
-
-
-
+* Masthead Ad
 
 
 # Usage
 
-### Infeed Video Ad tag in layout file
-![alt text](https://raw.githubusercontent.com/AdsPLAY/mobile-android-sdk/master/specs/infeed.png "AdsPlay Infeed in App View")
-```
-    <net.adsplay.holder.AdsPlayHolderVideo
-                    android:id="@+id/masterhead_view"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    />
-```
+### Copy library and update build.gradle
+https://github.com/AdsPLAY/mobile-android-sdk/blob/master/sample_app/build.gradle
 
-### Masthead Video Ad tag in layout file
-![alt text](https://raw.githubusercontent.com/AdsPLAY/mobile-android-sdk/master/specs/masthead.png "AdsPlay Masthead in App View")
-```
-    <net.adsplay.holder.AdsPlayHolderVideo
-                    android:id="@+id/masterhead_view"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    />
-```
 
-### Display Image Banner tag in layout file
-
+### Put WebView tag in layout file
+https://github.com/AdsPLAY/mobile-android-sdk/blob/master/sample_app/src/main/res/layout/activity_main.xml
 ```
-    <net.adsplay.holder.AdsPlayHolderImage
-            android:id="@+id/banner_view"
+<WebView
+            android:id="@+id/masthead_adview"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="272dp"
             />
 ```
 
-### Sample usage in source code
-
-![alt text](http://adsplay.net/img/adsplay-mobile-demo.jpg "AdsPlay Demo App View")
-
+### Register Java code
+https://github.com/AdsPLAY/mobile-android-sdk/blob/master/sample_app/src/main/java/net/adsplay/scalablevideo/sample/MainActivity.java
 ```
-public class MainActivity extends AppCompatActivity {
-     @Override
+    WebView mastheadAdview;
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //for mobile banner
-        ((AdsPlayHolderImage)findViewById(R.id.banner_view)).loadDataAdUnit(this, 1008);
-
-        //for mobile infeed video
-        ((AdsPlayHolderVideo)findViewById(R.id.masterhead_view)).loadDataAdUnit(this, 1009);
+        mastheadAdview = (WebView) findViewById(R.id.masthead_adview);
+        new AdsPlayMastheadWebview(this,mastheadAdview);
     }
-}
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mastheadAdview.onResume();
+    }
 ```
 
 # License
