@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION as int
-    buildToolsVersion BUILD_TOOLS_VERSION
+
 
     defaultConfig {
         applicationId "net.adsplay.masterhead.sample"
@@ -17,12 +17,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '27.0.3'
 }
 
 dependencies {
-    compile project(':library')
+    implementation project(':library')
 
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:recyclerview-v7:23.4.0'
+    implementation 'com.android.support:appcompat-v7:23.4.0'
+    implementation 'com.android.support:recyclerview-v7:23.4.0'
 }
