@@ -1,16 +1,18 @@
-# AdsPlay Mobile SDK for special formats
+# Open SDK for Mobile Ad Tech 
 
 * Masthead Ad
+* Popup Ad
+* Standard Display Banner
 
 
 # Usage
 
 ### Copy library and update build.gradle
-https://github.com/AdsPLAY/mobile-android-sdk/blob/master/sample_app/build.gradle
+sample_app/build.gradle
 
 
 ### Put WebView tag in layout file
-https://github.com/AdsPLAY/mobile-android-sdk/blob/master/sample_app/src/main/res/layout/activity_main.xml
+sample_app/src/main/res/layout/activity_main.xml
 ```
 <WebView
             android:id="@+id/masthead_adview"
@@ -20,7 +22,7 @@ https://github.com/AdsPLAY/mobile-android-sdk/blob/master/sample_app/src/main/re
 ```
 
 ### Register Java code
-https://github.com/AdsPLAY/mobile-android-sdk/blob/master/sample_app/src/main/java/net/adsplay/scalablevideo/sample/MainActivity.java
+sample_app/src/main/java/net/adsplay/scalablevideo/sample/MainActivity.java
 ```
     WebView mastheadAdview;
 
@@ -42,4 +44,4 @@ https://github.com/AdsPLAY/mobile-android-sdk/blob/master/sample_app/src/main/ja
 
 # License
 ```
-Copyright 2016 AdsPlay.net
+Copyright 2019 OpenTheta.com
